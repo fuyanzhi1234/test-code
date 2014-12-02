@@ -1,8 +1,10 @@
+cpprepos=/home/pro/git_src/cppmaven/cpprepos
+
 COMPER          = g++
 LINKER          = g++
-COMMINC         = -I. -I../log4cplus/include/
+COMMINC         = -I. -I$(cpprepos)/log4cplus-1.1.3-rc2/include/
 CMPFLAG         = $(G_CMPFLAG) -c $(COMMINC)
-LNKFLAG     	= -L../log4cplus/lib/ -Wl,-rpath=../log4cplus/lib/
+LNKFLAG     	= -L$(cpprepos)/log4cplus-1.1.3-rc2/lib/ -Wl,-rpath=$(cpprepos)/log4cplus-1.1.3-rc2/lib/
 SYTMLIB         = $(LNKFLAG) -llog4cplus
 
 EXE = log4cplus_test
