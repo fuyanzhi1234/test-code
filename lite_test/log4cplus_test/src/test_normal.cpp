@@ -27,7 +27,7 @@ void WriteLog()
 
 int test_single_processes()
 {
-    PropertyConfigurator::doConfigure(LOG4CPLUS_TEXT("../log.properties"));
+    PropertyConfigurator::doConfigure(LOG4CPLUS_TEXT("./conf_normal.properties"));
     WriteLog();
     return 0;
 }
@@ -36,7 +36,7 @@ int test_multi_processes()
 {
     log4cplus::initialize();
     try {
-        PropertyConfigurator::doConfigure(LOG4CPLUS_TEXT("../log.properties"));
+        PropertyConfigurator::doConfigure(LOG4CPLUS_TEXT("./conf_normal.properties"));
         for(int i=0;i<1;i++)
         {
             pid_t pid =fork();
@@ -126,7 +126,7 @@ int test_multi_processes_async_and_modify_logfile_name()
 {
     log4cplus::initialize();
     try {
-        PropertyConfigurator::doConfigure(LOG4CPLUS_TEXT("../log_async.properties"));
+        PropertyConfigurator::doConfigure(LOG4CPLUS_TEXT("./conf_async.properties"));
         for(int i=0;i<5;i++)
         {
             pid_t pid =fork();
@@ -137,7 +137,7 @@ int test_multi_processes_async_and_modify_logfile_name()
             }
             else if(pid==0)
             {
-                PropertyConfigurator config("../log_async.properties");
+                PropertyConfigurator config("./conf_async.properties");
                 
                 std::string extend;
                 int rt =GenerateExtend(extend);
