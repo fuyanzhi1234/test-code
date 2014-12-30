@@ -1,0 +1,12 @@
+[2014-12-31 00:02:20,145.845] [INFO]  LOGIN log
+    [pid:58049 tid:139802404759328 host:WSCENTOS64_x64]
+    [test_multi_log.cpp:21 void simple_test()]
+
+[2014-12-31 00:03:11,365.515] [INFO]  LOGIN log
+    [pid:58556 tid:140034882340640 host:WSCENTOS64_x64]
+    [test_multi_log.cpp:21 void simple_test()]
+
+[2014-12-31 00:03:22,990.881] [INFO]  LOGIN log
+    [pid:58669 tid:140103703537440 host:WSCENTOS64_x64]
+    [test_multi_log.cpp:21 void simple_test()]
+

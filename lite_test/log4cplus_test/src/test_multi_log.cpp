@@ -14,20 +14,6 @@
 #include <string.h>
 #include <sys/time.h>
 
-void simple_test()
-{
-    log4cplus::PropertyConfigurator::doConfigure("./conf_multi_log.properties");
-    LOG4CPLUS_INFO(log4cplus::Logger::getInstance("BASE"),"BASE log." );
-    LOG4CPLUS_INFO(log4cplus::Logger::getInstance("LOGIN"),"LOGIN log" );
-}
-
-int main(int argc,char * argv[])
-{
-    simple_test();
-//    test_multi_processes();
-    return 0;
-}
-
 int test_multi_processes()
 {
     try {
@@ -45,7 +31,7 @@ int test_multi_processes()
             {
                 for(int i=0;i<1;i++)
                 {
-                    LOG4CPLUS_INFO(log4cplus::Logger::getInstance("BASE"),"worker process. BASE" );
+                    LOG4CPLUS_INFO(log4cplus::Logger::getInstance("baselogger"),"worker process. BASE" );
                 }
                 exit(0);
             }
@@ -61,3 +47,18 @@ int test_multi_processes()
     wait(&st);
     return 0;
 }
+
+void simple_test()
+{
+    log4cplus::PropertyConfigurator::doConfigure("./conf_multi_log.properties");
+    LOG4CPLUS_INFO(log4cplus::Logger::getInstance("baselogger"),"BASE log." );
+    LOG4CPLUS_INFO(log4cplus::Logger::getInstance("loginlogger"),"LOGIN log" );
+}
+
+int main(int argc,char * argv[])
+{
+    simple_test();
+//    test_multi_processes();
+    return 0;
+}
+
