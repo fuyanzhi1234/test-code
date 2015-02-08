@@ -47,7 +47,7 @@ Email:   dungeonsnd at gmail dot com / dungeonsnd at 126 dot com
 
 3 测试过程及结果
 
-	如图testing_capture.png所示，左侧putty是服务器,右侧putty是客户端.
+	如图testing_capture.png所示，左侧putty是服务器,右侧putty是客户端. 以下结果是笔者多次实验后抽取的某次结果，时间是使用http://open.baidu.com/special/time/显示的时间。
 
 	3.1 客户端频繁与服务端进行数据交互情况
 	服务端运行在CENTOS7.0， 启动命令tcptest-server 18600.
