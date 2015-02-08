@@ -52,8 +52,9 @@
 
 #include <arpa/inet.h>
 
+#define TCP_USER_TIMEOUT       18      /* How long for loss retry before timeout */
 
-
+#define ENABLE_USER_TIMEOUT 1
 
 #define MAXBUF 1024
 #define MAXEPOLLSIZE 10000
@@ -72,9 +73,9 @@ int set_keepalive(int fd)
     int rt =0;
     do{
         int keepalive = 1; // 开启keepalive属性
-        int keepidle = 10; // 如该连接在多少秒内没有任何数据往来,则进行探测
-        int keepinterval = 5; // 探测时发包的时间间隔为多少秒
-        int keepcount = 3; // 探测尝试的次数.如果第1次探测包就收到响应了,则后面的不再发.
+        int keepidle = 60; // 如该连接在多少秒内没有任何数据往来,则进行探测
+        int keepinterval = 12; // 探测时发包的时间间隔为多少秒
+        int keepcount = 2; // 探测尝试的次数.如果第1次探测包就收到响应了,则后面的不再发.
         rt =setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE, (void *)&keepalive , sizeof(keepalive ));
         if(0!=rt)
             break;
@@ -93,8 +94,12 @@ int set_keepalive(int fd)
 
 int set_tcp_user_timeout(int fd)
 {
-    int tcp_timeout =10*1000; // seconds before aborting a write()
+#if ENABLE_USER_TIMEOUT
+    int tcp_timeout =24*1000; // seconds before aborting a write()
     return setsockopt(fd, SOL_TCP, TCP_USER_TIMEOUT, &tcp_timeout, sizeof(int));
+#else
+	return 0;
+#endif	
 }
 
 
@@ -182,7 +187,7 @@ int main(int argc, char **argv)
     while (maxevents>0) 
     {
         int n = epoll_wait(efd, events, maxevents, -1);
-//		printf("      epoll_wait returned %d \n",n);
+		printf("      epoll_wait returned %d \n",n);
         if (n == -1)
         {
             printf("ERROR epoll_wait ,errno=%d,%s \n",errno,strerror(errno));
